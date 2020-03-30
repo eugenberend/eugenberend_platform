@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+#TODO: Move vhd to normal directory!
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/ubuntu1804"
+  config.vm.network "public_network", 
+    bridge: "Minikube",
+    ip: "172.17.20.10",
+    netmask: "24"
+  config.vm.provider "hyperv" do |h|
+    h.cpus = 4
+    h.enable_virtualization_extensions = true
+    h.maxmemory = nil
+    h.memory = 8192
+    h.vmname = "ubuntu-minikube"
+    h.auto_start_action = "Nothing"
+    h.auto_stop_action = "ShutDown"
+    h.enable_automatic_checkpoints = false
+    h.vm_integration_services = {
+      guest_service_interface: true,
+      heartbeat: true,
+      key_value_pair_exchange: true,
+      shutdown: true,
+      time_synchronization: false,
+      vss: true
+    }
+  end
+end
