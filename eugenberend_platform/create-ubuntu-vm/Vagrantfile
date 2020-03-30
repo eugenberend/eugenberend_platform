@@ -1,15 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-#TODO: Move vhd to normal directory!
-
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu1804"
-  config.vm.network "public_network", 
-    bridge: "Minikube",
-    ip: "172.17.20.10",
-    netmask: "24"
+  config.vm.network "private_network",
+    bridge: "Default Switch",
+    type: "dhcp"
   config.vm.provider "hyperv" do |h|
+    h.mac = "00155D00753A"
     h.cpus = 4
     h.enable_virtualization_extensions = true
     h.maxmemory = nil
@@ -27,4 +25,6 @@ Vagrant.configure("2") do |config|
       vss: true
     }
   end
+  config.vm.provision "file", source: "~/.ssh/vagrant.pub", destination: "~/.ssh/vagrant.pub"
+  config.vm.provision "shell", inline: "cat ~vagrant/.ssh/vagrant.pub >> ~vagrant/.ssh/authorized_keys"
 end
