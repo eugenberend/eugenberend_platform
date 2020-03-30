@@ -11,8 +11,7 @@
 1. Install Hyper-V `create-ubuntu-vm\enable-hyper-v.ps1`
 2. * Install vagrant `create-ubuntu-vm\install-vagrant.ps1`
 3. Run `create-ubuntu-vm\create-ssh-key.ps1`
-4. Run `create-ubuntu-vm\vagrant up`
-5. Switch to newly created VM
-6. Provide minikube with ansible
+4. Run `create-ubuntu-vm\vagrant up`. It provides minikube with ansible too
+5.
 
 * - Vagrant needs to reboot your Windows host machine
