@@ -1,9 +1,0 @@
-- hosts: all
-  gather_facts: yes
-  roles:
-    - role: gantsign.minikube
-    - role: ferrarimarco.virtualbox
-      become: yes
-  tasks:
-    - name: Start minikube
-      shell: "minikube start"

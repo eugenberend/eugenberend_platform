@@ -1,0 +1,23 @@
+- hosts: all
+  gather_facts: yes
+  roles:
+    - role: gantsign.minikube
+    - role: ferrarimarco.virtualbox
+      become: yes
+  tasks:
+    - name: Start minikube
+      shell: "minikube start"
+    - name: Get kubectl stable version
+      uri:
+        url: "https://storage.googleapis.com/kubernetes-release/release/stable.txt"
+        return_content: yes
+      register: kubectl_version
+    - name: Show kubectl version
+      debug:
+        msg: "{{ kubectl_version.content  | replace('\n', '') }}"
+    - name: Download kubectl stable version
+      become: true
+      get_url:
+        url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubectl_version.content | replace('\n', '') }}/bin/linux/amd64/kubectl"
+        dest: "/usr/local/bin"
+        mode: "0755"
