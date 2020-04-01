@@ -30,14 +30,3 @@
       async: 10
       poll: 0
       register: kubectl_proxy
-
-#TODO: copy config and certs onto host
-# DEFAULT_ROUTE=$(ip route show default | awk '/default/ {print $3}')
-# CLIENT_CERT=$(kubectl config view | grep client-certificate | awk '/client-certificate/ {print $2}')
-# CLIENT_KEY =$(kubectl config view | grep client-key | awk '/client-key/ {print $2}')
-# And too: certificate-authority: /home/vagrant/.minikube/ca.crt
-# Copy three files to host system with vagrant scp
-# kubectl config set-cluster
-# kubectl config set-credentials
-# kubectl config set-context
-# kubectl config use-context
