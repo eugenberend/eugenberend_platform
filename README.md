@@ -14,6 +14,6 @@ This solution deploys Ubuntu VM on Hyper-V and installs minikube on this VM.
 2. Install Chocolatey `create-ubuntu-vm\install-chocolatey.ps1`
 3. * Install vagrant `create-ubuntu-vm\install-vagrant.ps1`
 4. Run `create-ubuntu-vm\create-ssh-key.ps1`
-5. Run `create-ubuntu-vm\vagrant up`. It provides VM and installs minikube
+5. Run `create-ubuntu-vm\provide-vm.ps1`. It provides VM and installs minikube
 
 * - Vagrant needs to reboot your Windows host machine
