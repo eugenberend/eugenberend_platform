@@ -1,17 +1,6 @@
 FROM nginx:latest
-
-ARG USER=app
-ARG UID=1001
-ARG GID=1001
-
-COPY nginx.conf /etc/nginx/nginx.conf
-RUN useradd ${USER} \
-    && usermod -u $UID ${USER} \
-    && groupmod -g $GID ${USER} \
-    && mkdir -p /app \
-    && chown -R ${USER}:${USER} /app
+RUN usermod -u 1001 nginx
+RUN mkdir /app
 COPY homework.html /app
-
-WORKDIR /app
-
+COPY nginx.conf /etc/nginx/conf.d/
 EXPOSE 8000
