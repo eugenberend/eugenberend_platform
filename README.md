@@ -1,7 +1,9 @@
 <details>
- <summary>Install Minikube on Windows in a Hyper-V Ubuntu VM</summary>
+    <summary>Install Minikube on Windows in a Hyper-V Ubuntu VM</summary>
 
     # Windows
+
+    **TL;DR Fuck this. Just use minikube**
 
     This solution deploys Ubuntu VM on Hyper-V and installs minikube on this VM.
 
@@ -22,7 +24,7 @@
     7. Run `kubectl get pods --all-namespaces` to prove correctness
 
     * - Vagrant may need to reboot your Windows host machine, in case Hyper-V wasn't installed before.
-<details>
+</details>
 
 <details>
     <summary>Why system pods are sustainable</summary>
@@ -30,4 +32,27 @@
     1. kube-apiserver is a static pod. That means it is controlled directly by kubectl.
     2. core-dns is controlled by Deployment, which tracks it's state.
     3. kube-proxy is controlled by DaemonSet, which ensures that each node has a copy of a pod.
+</details>
+
 <details>
+    <summary>Why frontend pod fails</summary>
+
+    Because environment variables were not set. We should define at least these:
+    ```yaml
+        env:
+        - name: PRODUCT_CATALOG_SERVICE_ADDR
+          value: "productcatalogservice:3550"
+        - name: CURRENCY_SERVICE_ADDR
+          value: "currencyservice:7000"
+        - name: CART_SERVICE_ADDR
+          value: "cartservice:7070"
+        - name: RECOMMENDATION_SERVICE_ADDR
+          value: "recommendationservice:8080"
+        - name: SHIPPING_SERVICE_ADDR
+          value: "shippingservice:50051"
+        - name: CHECKOUT_SERVICE_ADDR
+          value: "checkoutservice:5050"
+        - name: AD_SERVICE_ADDR
+          value: "adservice:9555"
+    ```
+</details>
