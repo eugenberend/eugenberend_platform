@@ -7,6 +7,10 @@
   tasks:
     - name: Start minikube
       shell: "minikube start"
+    - name: Start dashboard
+      shell: "minikube dashboard &"
+      async: 10
+      poll: 0
     - name: Get kubectl stable version
       uri:
         url: "https://storage.googleapis.com/kubernetes-release/release/stable.txt"
@@ -21,3 +25,8 @@
         url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubectl_version.content | replace('\n', '') }}/bin/linux/amd64/kubectl"
         dest: "/usr/local/bin"
         mode: "0755"
+    - name: Run kubectl proxy
+      shell: "kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8080 &"
+      async: 10
+      poll: 0
+      register: kubectl_proxy
