@@ -3,14 +3,8 @@ kind: Pod # Объект, который создаем
 metadata:
   name: web # Название Pod
   labels: # Метки в формате key: value
-    env: test
+    app: web
 spec: # Описание Pod
-  containers: # Описание контейнеров внутри Pod
-    - name: web # Название контейнера
-      image: evgeniyberendyaev/web:latest # Образ из которого создается контейнер
-      volumeMounts:
-        - name: app
-          mountPath: /app
   initContainers:
     - name: init
       image: busybox:1.31.0
@@ -18,6 +12,22 @@ spec: # Описание Pod
       volumeMounts:
         - name: app
           mountPath: /app
+  containers: # Описание контейнеров внутри Pod
+    - name: web # Название контейнера
+      image: evgeniyberendyaev/web:latest # Образ из которого создается контейнер
+      ports:
+        - containerPort: 8000
+          protocol: TCP
+      volumeMounts:
+        - name: app
+          mountPath: /app
+      readinessProbe: # Добавим проверку готовности
+        httpGet:  # веб-сервера отдавать
+          path: /index.html # контент
+          port: 80
+      livenessProbe:
+        tcpSocket: { port: 8000 }
+
   volumes:
     - name: app
       emptyDir: {}
