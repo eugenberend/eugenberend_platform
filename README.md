@@ -1,4 +1,15 @@
 <details>
+    <summary>ДЗ-4: RBAC</summary>
+
+* Сделали аккаунт `bob` с правами кластер-админа
+* Чекнули привилегии `kubectl auth can-i create pods --as=system:serviceaccount:default:bob`
+* Сделали аккаунт `dave` вообще без прав
+* Сделали неймспейс `prometheus`, аккаунт `carol` в нём и дали всем SA из этого неймспейса право читать поды
+* Сделали неймспейс `dev`, создали роли `admin` и `view`, дали их аккаунтам `jane` и `ken`
+
+</details>
+
+<details>
     <summary>ДЗ-3: Pods and Deployments</summary>
 
 * Не запустилось с более 1 control plane нод. Есть [ишью](https://github.com/kubernetes-sigs/kind/issues/1555). КМК не хватает производительности по диску, т.к. в момент поднятия кластера дико растёт очередь записи на диск.
