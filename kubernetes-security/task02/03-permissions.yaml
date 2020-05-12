@@ -1,0 +1,20 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: get-list-watch-pods
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: get-list-watch-pods-role-binding
+subjects:
+  - kind: Group
+    name: system:serviceaccounts:prometheus
+roleRef:
+  kind: ClusterRole
+  name: get-list-watch-pods
+  apiGroup: rbac.authorization.k8s.io
