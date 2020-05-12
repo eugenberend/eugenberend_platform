@@ -1,4 +1,11 @@
 <details>
+    <summary>ДЗ-5: Networks</summary>
+
+*
+
+</details>
+
+<details>
     <summary>ДЗ-4: RBAC</summary>
 
 * Сделали аккаунт `bob` с правами кластер-админа
