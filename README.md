@@ -1,4 +1,12 @@
 <details>
+    <summary>ДЗ-6: PV/PVC</summary>
+
+* Задеплоен `minio` c headless-сервисом
+* Логопасс упрятаны в сикреты
+
+</details>
+
+<details>
     <summary>ДЗ-5: Networks</summary>
 
 * Добавили readinessProbe 80/tcp - получили болт, ведь сервис слушает на 8000, а не на 80
