@@ -1,3 +1,4 @@
 .vagrant
 *.log
 config.txt
+*.exe
