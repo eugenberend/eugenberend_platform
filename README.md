@@ -1,8 +1,46 @@
 <details>
+    <summary>ДЗ-8: Templating</summary>
+
+* Задеплоили кластер через `terraform`
+* Сконфигурировали `KUBECONFIG` для взаимодействия с кластером: `gcloud container clusters get-credentials hw8`
+* Скачали и установили `Helm 3`
+* Добавили `stable` репозиторий
+* Создали namespace `nginx-ingress`
+* Катнули сам `nginx-ingress`. Убедились, что выдались `CLUSTER-IP` и `EXTERNAL-IP`
+* Добавили `jetstack` репозиторий
+* Создали namespace `cert-manager` - он сам не создаётся, но по умолчанию все ресурсы чарта создаются в нём
+* Установили CRD, как того требует инструкци (ссылка в презе устарела) `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager.crds.yaml`
+* Для этого понадобилось заапгрейдить версию кластера `Kubernetes` через `Terraform`
+* Валидацию выключать [больше не надо](https://github.com/jetstack/cert-manager/issues/2084)
+* Установили `cert-manager`:
+
+```bash
+helm upgrade --install cert-manager jetstack/cert-manager --wait \
+--namespace=cert-manager \
+--version=0.15.0`
+```
+
+* [Проверили работу](https://cert-manager.io/docs/installation/kubernetes/), сделав тестовый самоподписанный сертификат
+* Развернули необходимый для работы `cert-manager` `ClusterIssuer`
+* Протестировали выдачу сертификатов с помощью специально созданного для этого ингресса:
+
+`kubectl describe certificate -n default`
+
+```log
+Normal  Requested     9m15s  cert-manager  Created new CertificateRequest resource "test-issuance-2401427893"
+```
+
+* Для регистрации DNS-имени воспользовались `xip.io`
+* 
+
+</details>
+
+<details>
     <summary>ДЗ-6: PV/PVC</summary>
 
 * Задеплоен `minio` c headless-сервисом
 * Логопасс упрятаны в сикреты
+* Надо поиграться с `minio`
 
 </details>
 

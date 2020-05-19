@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: letsencrypt-test
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    cert-manager.io/cluster-issuer: "letsencrypt-hw8"
+
+spec:
+  tls:
+  - hosts:
+    - 35.228.7.217.xip.io
+    secretName: test-issuance
+  rules:
+  - host: 35.228.7.217.xip.io
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-ingress-controller
+          servicePort: 80

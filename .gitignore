@@ -2,3 +2,7 @@
 *.log
 config.txt
 *.exe
+.terraform
+*.lock
+*.tfstate*
+*.tfvars
