@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - 35.228.7.217.xip.io
+    - 35.228.7.217.nip.io
     secretName: test-issuance
   rules:
-  - host: 35.228.7.217.xip.io
+  - host: 35.228.7.217.nip.io
     http:
       paths:
       - backend:

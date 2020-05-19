@@ -30,8 +30,11 @@ helm upgrade --install cert-manager jetstack/cert-manager --wait \
 Normal  Requested     9m15s  cert-manager  Created new CertificateRequest resource "test-issuance-2401427893"
 ```
 
-* Для регистрации DNS-имени воспользовались `xip.io`
-* 
+* Для регистрации DNS-имени воспользовались `xip.io` (а потом `nip.io`)
+* Скачали `values.yaml` для чарта и поменяли на свои значения
+* Установили последнюю версию чарта `chartmuseum`. Версия 2.3.2 ругалась на ошибку манифеста: `Error: unable to build kubernetes objects from release manifest: unable to recognize "": no matches for kind "Deployment" in version "extensions/v1beta1"`
+* И всё работает супер, выдался нормальный сертификат
+* Описание работы с `Chartmuseum` тут: <https://chartmuseum2.35.228.7.217.nip.io/>
 
 </details>
 
