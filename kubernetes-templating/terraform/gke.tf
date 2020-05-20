@@ -22,7 +22,7 @@ resource "google_container_node_pool" "hw8_nodes" {
   version = var.kubernetes_version
   node_config {
     preemptible  = true
-    machine_type = var.machine_type
+    machine_type = var.machine_type_big
     
     metadata = {
       disable-legacy-endpoints = "true"

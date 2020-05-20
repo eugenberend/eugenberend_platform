@@ -266,7 +266,7 @@ ingress:
     # - name: chartmuseum.domain1.com
     #   path: /
     #   tls: false
-    - name: chartmuseum2.35.228.7.217.nip.io
+    - name: chartmuseum.35.228.193.63.nip.io
       path: /
 
       ## Set this to true in order to enable TLS on the ingress record

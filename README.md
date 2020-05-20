@@ -6,7 +6,7 @@
 * Скачали и установили `Helm 3`
 * Добавили `stable` репозиторий
 * Создали namespace `nginx-ingress`
-* Катнули сам `nginx-ingress`. Убедились, что выдались `CLUSTER-IP` и `EXTERNAL-IP`
+* Катнули сам `nginx-ingress` (latest). Убедились, что выдались `CLUSTER-IP` и `EXTERNAL-IP` `35.228.193.63`
 * Добавили `jetstack` репозиторий
 * Создали namespace `cert-manager` - он сам не создаётся, но по умолчанию все ресурсы чарта создаются в нём
 * Установили CRD, как того требует инструкци (ссылка в презе устарела) `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager.crds.yaml`
@@ -17,7 +17,7 @@
 ```bash
 helm upgrade --install cert-manager jetstack/cert-manager --wait \
 --namespace=cert-manager \
---version=0.15.0`
+--version=0.15.0
 ```
 
 * [Проверили работу](https://cert-manager.io/docs/installation/kubernetes/), сделав тестовый самоподписанный сертификат
@@ -30,11 +30,19 @@ helm upgrade --install cert-manager jetstack/cert-manager --wait \
 Normal  Requested     9m15s  cert-manager  Created new CertificateRequest resource "test-issuance-2401427893"
 ```
 
+* А потом курланув `curl https://35.228.193.63.nip.io -v`
 * Для регистрации DNS-имени воспользовались `xip.io` (а потом `nip.io`)
 * Скачали `values.yaml` для чарта и поменяли на свои значения
 * Установили последнюю версию чарта `chartmuseum`. Версия 2.3.2 ругалась на ошибку манифеста: `Error: unable to build kubernetes objects from release manifest: unable to recognize "": no matches for kind "Deployment" in version "extensions/v1beta1"`
 * И всё работает супер, выдался нормальный сертификат
-* Описание работы с `Chartmuseum` тут: <https://chartmuseum2.35.228.7.217.nip.io/>
+* Описание работы с `Chartmuseum` тут: <https://chartmuseum.com/docs/#uploading-a-chart-package>
+* Создали namespace `harbor`
+* Скачали `values.yaml` для чарта и поменяли на свои значения
+* Добавили Helm-репо `harbor`
+* Задеплоили `harbor`: `helm upgrade --install harbor harbor/harbor -f values.yaml -n harbor`
+* Для получения сертификата необходим именно такой манифест, как указано
+* `helmfile` не делал
+* 
 
 </details>
 
