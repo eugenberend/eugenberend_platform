@@ -42,7 +42,8 @@ Normal  Requested     9m15s  cert-manager  Created new CertificateRequest resour
 * Задеплоили `harbor`: `helm upgrade --install harbor harbor/harbor -f values.yaml -n harbor`
 * Для получения сертификата необходим именно такой манифест, как указано
 * `helmfile` не делал
-* 
+* Создали namespace `hipster-shop`
+* Разрешили `NodePort` и, узнав IP нод, открыли веб-приложение
 
 </details>
 
